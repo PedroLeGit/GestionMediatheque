@@ -1,15 +1,114 @@
+<script>
+//CONTROLE LES DONNEES DU FORMULAIRE AJOUT UTILISATEURS
+//https://www.w3schools.com/js/js_validation.asp
+function ajoutUtilisateurs() {
+  var nom = document.forms["FormulaireUtilisateurs"]["nom"].value;
+  var prenom = document.forms["FormulaireUtilisateurs"]["prenom"].value;
+  var rue = document.forms["FormulaireUtilisateurs"]["rue"].value;
+  var codepostal = document.forms["FormulaireUtilisateurs"]["codepostal"].value;
+  var ville = document.forms["FormulaireUtilisateurs"]["ville"].value;
+  var datenaissance = document.forms["FormulaireUtilisateurs"]["datenaissance"].value;
+  var mail = document.forms["FormulaireUtilisateurs"]["mail"].value;
+  var dateinscription = document.forms["FormulaireUtilisateurs"]["dateinscription"].value;
+
+  if (nom == "" || prenom == "" || rue == "" || codepostal == "" ||
+  ville == "" || datenaissance == "" || mail == "" || dateinscription == "" ) {
+    alert("L'un des champs est vide");
+    return false;
+  }
+}
+
+//COLLAPSE LA LISTE UTILISATEURS
+  function collapseUtilisateurs(){
+    $("#listingUsers").slideToggle("slow");
+  }
+
+//MET A JOUR LES DONNEES LISTE UTILISATEURS
+	function majUtilisateurs(){
+	    $.ajax({url: "../crud/importBDD_Users.php", success : function(result){
+	      if (result == "true"){
+	        window.alert("Pas de nouvelle donnee a importer");
+	      } else {
+	        window.alert("Les dernieres donnees ont ete mis a jour avec succes");
+	      }
+	    }});
+	  }
+
+//SUPPRIME UN UTILISATEUR
+	function supprUtilisateurs(idweb, idC){
+		// window.alert(idweb, idC);
+		$.get("../crud/delete_User.php?idweb="+idweb+"&idC="+idC, function(valueUtilisateurs, status){
+			if(status == "success"){
+				window.alert('Utilisateur supprime');
+				location.reload();
+			}else {
+				window.alert('Cet utilisateur ne peut etre supprime ou a deja ete supprime');
+				location.reload();
+			}
+		});
+	}
+
+//MODIFIE UN UTILISATEUR
+	function modifFormulaireUtilisateurs(idweb, idC, nom, prenom, mail){
+		// window.alert("#tdNom"+idweb+idC);
+		$("#tdNom"+idweb+idC).wrap("<td><input type=\"text\" id=\"tdNom\" value="+nom+" style=\"text-align: center; padding_left: 50px;\"></td>");
+		$("#tdPrenom"+idweb+idC).wrap("<td><input type=\"text\" id=\"tdPrenom\" value="+prenom+" style=\"text-align: center; padding_left: 50%;\"></td>");
+		$("#tdMail"+idweb+idC).wrap("<td><input type=\"text\" id=\"tdMail\" value="+mail+" style=\"text-align: center; padding_left: 50%;\"></td>");
+		$("input").change(function(){
+			var nom1 = document.getElementById("tdNom").value;
+			var prenom1 = document.getElementById("tdPrenom").value;
+			var mail1 = document.getElementById("tdMail").value;
+	  	$.get("../crud/update_User.php?idweb="+idweb+"&idC="+idC+"&nom="+nom1+"&prenom="+prenom1+"&mail="+mail1, function(valueUtilisateurs, status){
+
+				alert("Data:"+valueUtilisateurs+"\nStatus :"+status);
+				location.reload();
+			});
+		});
+		// $("#tdNomUtilisateur+idweb+idC").wrapAll("<input type=\"text\", value=\".nom.\"></input>");
+		// $("#tdPrenomUtilisateur+idweb+idC").wrapAll("<input type=\"text\", value=\".prenom.\"></input>");
+		// $("#tdMailUtilisateur+idweb+idC").wrapAll("<input type=\"text\", value=\".mail.\"></input>");
+	}
+
+
+</script>
+
 <div class="container">
-  <h2>Liste des utilisateurs</h2>
+  <h2>Liste des Utilisateurs</h2>
 
   <input type="button" class="btn btn-info" value="Mettre a jour la base" onclick="majUtilisateurs()">
 
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Ajouter un utilisateur</button>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ajouter un utilisateur</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div><!-- .modal-header -->
+        <div class="modal-body">
+          <form name="FormulaireUtilisateurs" action="/" onsubmit="return ajoutUtilisateurs()" method="post" >
+            <div class="form-group">
+              Nom: <input type="text" name="nom"><br/>
+              Prenom: <input type="text" name="prenom"><br/>
+              Rue: <input type="text" name="rue"><br/>
+              Code postal: <input type="text" name="cp"><br/>
+              Ville:  <input type="text" name="ville"><br/>
+              Date naissance:   <input type="date" name="datenaissance"><br/>
+              Adresse mail:     <input type="email" name="mail"><br/>
+              Date inscription:   <input type="date" name="dateinscription"><br/><br/>
+              <input type="submit"class="btn btn-primary" value="Ajouter">
+            </div> <!-- form-group -->
+          </form> <!-- .myForm -->
+        </div><!-- .modal-body -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div><!-- .modal-footer -->
+      </div><!-- .modal-content -->
+    </div><!-- .modal-dialog -->
+  </div><!-- .modal fade  -->
 
-<!-- APPEL FICHIER AJOUT UTILISATEUR -->
-  <?php
-  require ('addUser.php');
-  ?>
-<!-- APPEL FICHIER AJOUT UTILISATEUR -->
 
   <br/>
   <br/>
@@ -17,7 +116,7 @@
 <!-- BLOC D'INSTRUCTION LISTING -->
 <input type="button" value="Montrer/Cacher Liste" class="btn btn-info" onclick="collapseUtilisateurs()">
 
-<div id="listingUsers" class="listingUsers">
+<div id="listingUsers" class="listingUsers" style="display: none;">
   <?php
   require ('inc/dbGM.php');
   try{

@@ -10,7 +10,7 @@
   $mail = $_GET['mail'];
   var_dump($idweb." ".$idC." ".$nom." ".$prenom." ".$mail);
 
-require ('inc/dbGM.php');
+require ('../inc/dbGM.php');
 $sql = "UPDATE utilisateurs
         SET nom_utilisateur = ?,
             prenom_utilisateur = ?,
@@ -20,7 +20,7 @@ $prep = $pdoGM->prepare($sql);
 $prep->execute([$nom, $prenom, $mail, $idweb]);
 
 
-require ('inc/dbC#.php');
+require ('../inc/dbC#.php');
 $sql = "UPDATE emprunteur
         SET emp_nom = :emp_nom,
             emp_prenom = :emp_prenom,
