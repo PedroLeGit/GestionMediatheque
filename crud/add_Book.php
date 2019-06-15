@@ -22,11 +22,14 @@ if (!empty($_POST)){
     $exec = $sql2->execute([$_POST['titre'], $_POST['isbn'], $_POST['tome'], $_POST['parution'], $_POST['nbpages'], $_POST['image'], $_POST['couleur'],
 		 $_POST['commentaire'], $_POST['format'], $_POST['series'], $_POST['editeur']]);
   }
-	if($exec == true){
-    echo 'true';
-  }else {
-    echo 'false';
-  }
+	<script>
+	 if($exec == true){
+	  alert("Livre enregistre");
+	}else {
+	  alert("Erreur d'enregistrement");
+	}
+	location.reload();
+	</script><?php
 
 }
 ?>

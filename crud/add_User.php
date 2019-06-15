@@ -3,7 +3,7 @@
 
 <?php
 //AJOUTE UNIQUEMENT DANS LA BDD C# PUISQU'IL SUFFIRA DE FAIRE L'IMPORTATION POUR CLONE SUR LA BDD WEB
-require ('inc/dbC#.php');
+require ('../inc/dbC#.php');
 
 if (isset($_SESSION["formulaire_envoye"])) {
 	$_POST = $_SESSION["formulaire_envoye"];
