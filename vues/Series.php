@@ -1,34 +1,3 @@
-<?php
-// FONCTION D'AJOUT SERIE
-//AJOUTE UNIQUEMENT DANS LA BDD C# PUISQU'IL SUFFIRA DE FAIRE L'IMPORTATION POUR CLONE SUR LA BDD WEB
-require ('inc/dbC#.php');
-
-if (isset($_SESSION["formulaire_envoye"])) {
-	$_POST = $_SESSION["formulaire_envoye"];
-	unset($_SESSION["formulaire_envoye"]);
-}
-
-if (!empty($_POST)){
-  if (!empty($_POST['serienom']) && !empty($_POST['serienbtomes']))){
-
-    $sql2 = $pdoC->prepare('INSERT INTO serie (SerieNom, SerieNbTomes)
-    VALUES (?,?)');
-    $exec = $sql2->execute([$_POST['serienom'], $_POST['serienbtomes']]);
-  }
-  ?>
-<script>
- if($exec == true){
-  alert("Nouvelle serie ajoutee");
-}else {
-  alert("Erreur d'enregistrement");
-}
-location.reload();
-</script><?php
-
-}
-
-?>
-
 <script>
 //CONTROLE LES DONNEES DU FORMULAIRE AJOUT SERIE
 //https://www.w3schools.com/js/js_validation.asp
@@ -57,14 +26,16 @@ location.reload();
 	    $.ajax({url: "../crud/importBDD_Series.php", success : function(result){
 	      if (result == "true"){
 	        window.alert("Pas de nouvelle donnee a importer");
+					location.reload();
 	      } else {
 	        window.alert("Les dernieres donnees ont ete mis a jour avec succes");
+					location.reload();
 	      }
 	    }});
 	  }
 
 //SUPPRIME UNE SERIE
-	function supprSeries(idweb, idC){
+	function supprSeries(idserie){
 		// window.alert(idweb, idC);
 		$.get("../crud/delete_Serie.php?idserie="+idserie, function(valueSeries, status){
 			if(status == "success"){
@@ -118,7 +89,7 @@ location.reload();
           <form name="FormulaireSeries" action="/" onsubmit="return ajoutSerie()" method="post" >
             <div class="form-group">
               Nom de la serie : <input type="text" name="serienom"><br/>
-              Nombre de tomes de la serie: <input type="text" name="serienbtomes"><br/>
+              Nombre de tomes de la serie: <input type="number" name="serienbtomes"><br/>
               <input type="submit"class="btn btn-primary" value="Ajouter">
             </div> <!-- form-group -->
           </form> <!-- .myForm -->
@@ -129,7 +100,7 @@ location.reload();
       </div><!-- .modal-content -->
     </div><!-- .modal-dialog -->
   </div><!-- .modal fade  -->
-
+<?php include ('crud/add_Serie.php')?>
 
   <br/>
   <br/>
@@ -168,8 +139,8 @@ location.reload();
         <!-- 	<td id="tdMailUtilisateur<?php echo $idweb.$idC; ?>" style="text-align: center;"> <?php echo $value['mail_utilisateur'] ?> </td> -->
         <td style="text-align: center;"> <?php echo $value['SerieNum'] ?> </td>
         <td id="tdSerienom<?php echo $idserie; ?>" style="text-align: center;"> <?php echo $value['SerieNom'] ?> </td>
-        <td id="tdSerienbtomes<?php echo $idserieC; ?>" style="text-align: center;"> <?php echo $value['SerieNbTomes'] ?> </td>
-        <td style="text-align: center;"><button type="button" class="btn btn-info" onclick="modifFormulaireSerie(<?php echo $idserie.",".$serienom.",".$serienbtomes; ?>)">Modifier</button></td>
+        <td id="tdSerienbtomes<?php echo $idserie; ?>" style="text-align: center;"> <?php echo $value['SerieNbTomes'] ?> </td>
+        <td style="text-align: center;"><button type="button" class="btn btn-info" onclick="modifFormulaireSerie(<?php echo $idserie.",'".$serienom."',".$serienbtomes; ?>)">Modifier</button></td>
         <td style="text-align: center;"><button type="button" class="btn btn-info" onclick="supprSeries(<?php echo $idserie; ?>)">Supprimer</button></td>
         <td><br/><br/></td>
       </tr>

@@ -1,36 +1,3 @@
-<?php
-//AJOUTE UNIQUEMENT DANS LA BDD C# PUISQU'IL SUFFIRA DE FAIRE L'IMPORTATION POUR CLONE SUR LA BDD WEB
-require ('inc/dbC#.php');
-
-if (isset($_SESSION["formulaire_envoye"])) {
-	$_POST = $_SESSION["formulaire_envoye"];
-	unset($_SESSION["formulaire_envoye"]);
-}
-
-if (!empty($_POST)){
-  if (!empty($_POST['titre']) && !empty($_POST['isbn']) && !empty($_POST['tome'])
-  && !empty($_POST['parution']) && !empty($_POST['nbpages'])
-  && !empty($_POST['image']) && !empty($_POST['couleur'])
-  && !empty($_POST['commentaire']) && !empty($_POST['format'])
-	 && !empty($_POST['series']) && !empty($_POST['editeur'])){
-
-    $sql2 = $pdoC->prepare('INSERT INTO bd (BdTitre, BdIsbn, BdTome, BdParution, bdNbPages, BdImage, BdCouleur, BdCommentaires, BdFormat, NumSerie, NumEditeur)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?)');
-    $exec = $sql2->execute([$_POST['titre'], $_POST['isbn'], $_POST['tome'], $_POST['parution'], $_POST['nbpages'], $_POST['image'], $_POST['couleur'],
-		 $_POST['commentaire'], $_POST['format'], $_POST['series'], $_POST['editeur']]);
-  }
-  ?>
-	<script>
-	 if($exec == true){
-	  alert("Livre enregistre");
-	}else {
-	  alert("Erreur d'enregistrement");
-	}
-	location.reload();
-	</script><?php
-
-}
-?>
 <script>
 //CONTROLE LES DONNEES DU FORMULAIRE AJOUT LIVRES
 //https://www.w3schools.com/js/js_validation.asp
@@ -70,14 +37,16 @@ if (!empty($_POST)){
 	    $.ajax({url: "../crud/importBDD_Books.php", success : function(result){
 	      if (result == "true"){
 	        window.alert("Pas de nouvelle donnee a importer");
+					location.reload();
 	      } else {
 	        window.alert("Les dernieres donnees ont ete mis a jour avec succes");
+					location.reload();
 	      }
 	    }});
 	  }
 
 //SUPPRIME UN LIVRE
-	function supprLivres(idlivre){
+	function supprLivre(idlivre){
 		// window.alert(idweb, idC);
 		$.get("../crud/delete_Book.php?idlivre="+idlivre, function(valueLivres, status){
 			if(status == "success"){
@@ -146,7 +115,7 @@ if (!empty($_POST)){
               Commentaire:   <input type="text" name="commentaire"><br/>
               Format:   <input type="text" name="format"><br/>
               Serie:
-                <select id="series">
+                <select id="series" name="series">
                   <?php
                   $sql = 'SELECT SerieNom FROM serie';
                   $res = $pdoGM->query($sql);
@@ -157,7 +126,7 @@ if (!empty($_POST)){
                 ?>
               </select>  <br/>
               Editeur:
-                <select id="editeurs">
+                <select id="editeurs" name="editeurs">
                   <?php
                   $sql = 'SELECT EditeurNom FROM editeur';
                   $res = $pdoGM->query($sql);
@@ -179,6 +148,7 @@ if (!empty($_POST)){
       </div><!-- .modal-content -->
     </div><!-- .modal-dialog -->
   </div><!-- .modal fade  -->
+	<?php include ('crud/add_Book.php')?>
 
 
   <br/>

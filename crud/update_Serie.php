@@ -9,8 +9,8 @@
 
 
   $idserie = $_GET['idserie'];
-  $serienom = $_GET['SerieNom'];
-  $serienbtomes = $_GET['SerieNbTomes'];
+  $serienom = $_GET['serienom'];
+  $serienbtomes = $_GET['serienbtomes'];
 
 $sql = "UPDATE serie
         SET SerieNom = ?,

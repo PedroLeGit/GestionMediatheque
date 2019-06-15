@@ -8,13 +8,13 @@
 
   $idlivre = $_GET['idlivre'];
 
-require ('inc/dbGM.php');
+require ('../inc/dbGM.php');
   $sql = "DELETE FROM livres WHERE BdId = :id";
   $prep = $pdoGM->prepare($sql);
   $prep->bindParam(':id', $idlivre, PDO::PARAM_INT);
   $prep->execute();
 
-require ('inc/dbC#.php');
+require ('../inc/dbC#.php');
   $sql = "DELETE FROM bd WHERE BdId = :id";
   $prep = $pdoC->prepare($sql);
   $prep->bindParam(':id', $idlivre, PDO::PARAM_INT);

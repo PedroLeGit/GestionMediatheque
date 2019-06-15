@@ -12,3 +12,7 @@ require ('inc/header.php');
 <!-- APPEL VUE LIVRES -->
 	<?php include "vues/Livres.php"; ?>
 <!-- FIN APPEL VUE LIVRES -->
+
+<!-- APPEL VUE SERIES -->
+	<?php include "vues/Series.php"; ?>
+<!-- FIN APPEL VUE SERIES -->
