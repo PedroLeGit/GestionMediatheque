@@ -34,7 +34,7 @@
 
 //MET A JOUR LES DONNEES LISTE LIVRES
 	function majLivres(){
-	    $.ajax({url: "../crud/importBDD_Books.php", success : function(result){
+	    $.ajax({url: "../crud/Book/importBDD_Books.php", success : function(result){
 	      if (result == "true"){
 	        window.alert("Pas de nouvelle donnee a importer");
 					location.reload();
@@ -48,9 +48,9 @@
 //SUPPRIME UN LIVRE
 	function supprLivre(idlivre){
 		// window.alert(idweb, idC);
-		$.get("../crud/delete_Book.php?idlivre="+idlivre, function(valueLivres, status){
+		$.get("../crud/Book/delete_Book.php?idlivre="+idlivre, function(valueLivres, status){
 			if(status == "success"){
-				window.alert('Livre supprime');
+				window.alert('Livre supprime'+valueLivres);
 				location.reload();
 			}else {
 				window.alert('Ce livre ne peut etre supprime ou a deja ete supprime');
@@ -73,7 +73,7 @@
 			var parution1 = document.getElementById("tdParution").value;
       var serie1 = document.getElementById("tdSerie").value;
       var editeur1 = document.getElementById("tdEditeur").value;
-	  	$.get("../crud/update_Book.php?idlivre="+idlivre+"&titre="+titre1+"&tome="+tome1+"&parution="+parution1+"&serie="+serie1+"&editeur="+editeur1, function(valueLivres, status){
+	  	$.get("../crud/Book/update_Book.php?idlivre="+idlivre+"&titre="+titre1+"&tome="+tome1+"&parution="+parution1+"&serie="+serie1+"&editeur="+editeur1, function(valueLivres, status){
 
 				alert("Data:"+valueLivres+"\nStatus :"+status);
 				location.reload();
@@ -117,25 +117,25 @@
               Serie:
                 <select id="series" name="series">
                   <?php
-                  $sql = 'SELECT SerieNom FROM serie';
+                  $sql = 'SELECT SerieNom, SerieNum FROM serie';
                   $res = $pdoGM->query($sql);
                   $resGM = $res->fetchAll(PDO::FETCH_ASSOC);
-                  foreach ($resGM as $key => $value) {
-                    echo '<option value='.$value["SerieNom"].'>'.$value["SerieNom"].'</option>';
+                  foreach ($resGM as $key => $value) { ?>
+                    <option value=" <?php echo $value['SerieNum']; ?>"> <?php echo $value['SerieNom']; ?> </option> <?php
                   }
                 ?>
               </select>  <br/>
               Editeur:
                 <select id="editeurs" name="editeurs">
                   <?php
-                  $sql = 'SELECT EditeurNom FROM editeur';
+                  $sql = 'SELECT EditeurNom, EditeurNum FROM editeur';
                   $res = $pdoGM->query($sql);
                   $resGM = $res->fetchAll(PDO::FETCH_ASSOC);
                   foreach ($resGM as $key => $value) {
-                      echo '<option value='.$value["EditeurNom"].'>'.$value["EditeurNom"].'</option>';
+                      echo '<option value='.$value['EditeurNum'].'>'.$value["EditeurNom"].'</option>';
                   }
                 ?>
-              </select>  <br/>
+              </select>
 
               <br/><br/>
               <input type="submit"class="btn btn-primary" value="Ajouter">
@@ -148,7 +148,7 @@
       </div><!-- .modal-content -->
     </div><!-- .modal-dialog -->
   </div><!-- .modal fade  -->
-	<?php include ('crud/add_Book.php')?>
+	<?php include ('crud/Book/add_Book.php')?>
 
 
   <br/>

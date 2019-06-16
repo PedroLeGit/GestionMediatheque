@@ -31,7 +31,7 @@
 
 //MET A JOUR LES DONNEES LISTE UTILISATEURS
 	function majUtilisateurs(){
-	    $.ajax({url: "../crud/importBDD_Users.php", success : function(result){
+	    $.ajax({url: "../crud/User/importBDD_Users.php", success : function(result){
 	      if (result == "true"){
 	        window.alert("Pas de nouvelle donnee a importer");
 					location.reload();
@@ -45,7 +45,7 @@
 //SUPPRIME UN UTILISATEUR
 	function supprUtilisateurs(idweb, idC){
 		// window.alert(idweb, idC);
-		$.get("../crud/delete_User.php?idweb="+idweb+"&idC="+idC, function(valueUtilisateurs, status){
+		$.get("../crud/User/delete_User.php?idweb="+idweb+"&idC="+idC, function(valueUtilisateurs, status){
 			if(status == "success"){
 				window.alert('Utilisateur supprime');
 				location.reload();
@@ -66,7 +66,7 @@
 			var nom1 = document.getElementById("tdNom").value;
 			var prenom1 = document.getElementById("tdPrenom").value;
 			var mail1 = document.getElementById("tdMail").value;
-	  	$.get("../crud/update_User.php?idweb="+idweb+"&idC="+idC+"&nom="+nom1+"&prenom="+prenom1+"&mail="+mail1, function(valueUtilisateurs, status){
+	  	$.get("../crud/User/update_User.php?idweb="+idweb+"&idC="+idC+"&nom="+nom1+"&prenom="+prenom1+"&mail="+mail1, function(valueUtilisateurs, status){
 
 				alert("Data:"+valueUtilisateurs+"\nStatus :"+status);
 				location.reload();
@@ -116,7 +116,7 @@
       </div><!-- .modal-content -->
     </div><!-- .modal-dialog -->
   </div><!-- .modal fade  -->
-	<?php include ('crud/add_User.php')?>
+	<?php include ('crud/User/add_User.php')?>
 
 
   <br/>

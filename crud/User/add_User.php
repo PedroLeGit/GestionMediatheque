@@ -34,6 +34,5 @@ location.reload();
 }
 
 ?>
-?>
 
 <!-- FIN BLOC D'INSTRUCTION POUR AJOUTER UN UTILISATEUR -->

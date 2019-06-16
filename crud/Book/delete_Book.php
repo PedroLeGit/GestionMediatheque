@@ -8,22 +8,19 @@
 
   $idlivre = $_GET['idlivre'];
 
+
 require ('../inc/dbGM.php');
-  $sql = "DELETE FROM livres WHERE BdId = :id";
-  $prep = $pdoGM->prepare($sql);
-  $prep->bindParam(':id', $idlivre, PDO::PARAM_INT);
-  $prep->execute();
+  $prep = $pdoGM->prepare("DELETE FROM livres WHERE BdId = ?");
+  $prep->execute([(int)$idlivre]);
 
 require ('../inc/dbC#.php');
-  $sql = "DELETE FROM bd WHERE BdId = :id";
-  $prep = $pdoC->prepare($sql);
-  $prep->bindParam(':id', $idlivre, PDO::PARAM_INT);
-  $prep->execute();
+  $prep = $pdoC->prepare("DELETE FROM bd WHERE BdId = ?");
+  $prep->execute([(int)$idlivre]);
 
   if($prep->execute() == true){
     echo 'true';
   }else {
     echo 'false';
   }
-// FIN BLOC D'INSTRUCTION POUR SUPPRIMER UN UTILISATEUR
+// FIN BLOC D'INSTRUCTION POUR SUPPRIMER UN LIVRE
 ?>

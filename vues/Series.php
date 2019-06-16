@@ -23,7 +23,7 @@
 
 //MET A JOUR LES DONNEES LISTE SERIES
 	function majSeries(){
-	    $.ajax({url: "../crud/importBDD_Series.php", success : function(result){
+	    $.ajax({url: "../crud/Serie/importBDD_Series.php", success : function(result){
 	      if (result == "true"){
 	        window.alert("Pas de nouvelle donnee a importer");
 					location.reload();
@@ -37,7 +37,7 @@
 //SUPPRIME UNE SERIE
 	function supprSeries(idserie){
 		// window.alert(idweb, idC);
-		$.get("../crud/delete_Serie.php?idserie="+idserie, function(valueSeries, status){
+		$.get("../crud/Serie/delete_Serie.php?idserie="+idserie, function(valueSeries, status){
 			if(status == "success"){
 				window.alert('Serie supprimee');
 				location.reload();
@@ -56,7 +56,7 @@
 		$("input").change(function(){
 			var serienom1 = document.getElementById("tdSerienom").value;
 			var serienbtomes1 = document.getElementById("tdSerienbtomes").value;
-	  	$.get("../crud/update_Serie.php?idserie="+idserie+"&serienom="+serienom1+"&serienbtomes="+serienbtomes1, function(valueSeries, status){
+	  	$.get("../crud/Serie/update_Serie.php?idserie="+idserie+"&serienom="+serienom1+"&serienbtomes="+serienbtomes1, function(valueSeries, status){
 
 				alert("Data:"+valueSeries+"\nStatus :"+status);
 				location.reload();
@@ -100,7 +100,7 @@
       </div><!-- .modal-content -->
     </div><!-- .modal-dialog -->
   </div><!-- .modal fade  -->
-<?php include ('crud/add_Serie.php')?>
+<?php include ('crud/Serie/add_Serie.php')?>
 
   <br/>
   <br/>
