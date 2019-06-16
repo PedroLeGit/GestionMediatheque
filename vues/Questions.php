@@ -69,4 +69,4 @@ function ajoutQuestion(){
 </form>
 </div>
 
-<?php header('Location: http://http://pedroperso.ovh/index.php', true, 303); ?>
+ <?php //header('Location: http://http://pedroperso.ovh/index.php', true, 303); ?>

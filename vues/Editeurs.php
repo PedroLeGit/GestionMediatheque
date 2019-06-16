@@ -90,7 +90,15 @@
           <form name="FormulaireEditeurs" action="/" onsubmit="return ajoutEditeurs()" method="post" >
             <div class="form-group">
               Nom de l'editeur : <input type="text" name="editeur"><br/>
-              Date de creation: <input type="number" name="editeurcreation"><br/>
+              Date de creation: <input type="number" name="editeurcreation"><small>Ecrire simplement l'annee</small><br/>
+              Adresse : <input type="text" name="editeuradresse"><br/>
+              Code: <input type="text" name="editeurcp"><br/>
+              Ville : <input type="text" name="editeurville"><br/>
+              Telephone : <input type="text" name="editeurtelephone"><br/>
+              Fax : <input type="text" name="editeurfax"><br/>
+              Mail : <input type="text" name="editeurmail"><br/>
+              Nom Contact : <input type="text" name="editeurnomcontact"><br/>
+              Prenom Contact : <input type="text" name="editeurprenomcontact"><br/>
               <input type="submit"class="btn btn-primary" value="Ajouter">
             </div> <!-- form-group -->
           </form> <!-- .myForm -->

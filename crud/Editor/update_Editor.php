@@ -4,8 +4,8 @@
   // echo 'idweb='; var_dump($_GET['idweb']); echo "\n";
   // echo 'idC='; var_dump($_GET['idC'])
 
-  require ('../inc/dbGM.php');
-  require ('../inc/dbC#.php');
+  require ('../../inc/dbGM.php');
+  require ('../../inc/dbC#.php');
 
 
   $idediteur = $_GET['idediteur'];

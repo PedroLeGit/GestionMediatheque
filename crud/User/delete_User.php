@@ -8,13 +8,13 @@
   $idweb = $_GET['idweb'];
   $idC = $_GET['idC'];
 
-require ('../inc/dbGM.php');
+require ('../../inc/dbGM.php');
   $sql = "DELETE FROM utilisateurs WHERE id_utilisateur = :id";
   $prep = $pdoGM->prepare($sql);
   $prep->bindParam(':id', $idweb, PDO::PARAM_INT);
   $prep->execute();
 
-require ('../inc/dbC#.php');
+require ('../../inc/dbC#.php');
   $sql = "DELETE FROM emprunteur WHERE emp_num = :id";
   $prep = $pdoC->prepare($sql);
   $prep->bindParam(':id', $idC, PDO::PARAM_INT);

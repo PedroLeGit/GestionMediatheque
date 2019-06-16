@@ -7,13 +7,13 @@
 
   $idserie = $_GET['idserie'];
 
-require ('../inc/dbGM.php');
+require ('../../inc/dbGM.php');
   $sql = "DELETE FROM serie WHERE SerieNum = :id";
   $prep = $pdoGM->prepare($sql);
   $prep->bindParam(':id', $idserie, PDO::PARAM_INT);
   $prep->execute();
 
-require ('../inc/dbC#.php');
+require ('../../inc/dbC#.php');
   $sql = "DELETE FROM bd WHERE SerieNum = :id";
   $prep = $pdoC->prepare($sql);
   $prep->bindParam(':id', $idserie, PDO::PARAM_INT);

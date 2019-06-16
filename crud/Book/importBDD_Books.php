@@ -2,8 +2,8 @@
 
 //MET A JOUR LA TABLE livres DE LA BASE GestionMediatheque, AVEC LES DONNEES DE LA TABLE bd DE LA BASE mottordus_2018_iscb
 
-  require ('../inc/dbC#.php');
-  require ('../inc/dbGM.php');
+  require ('../../inc/dbC#.php');
+  require ('../../inc/dbGM.php');
 
   try{
     //RECUPERE TOUTES LES DONNEES DANS LA BDD C#
