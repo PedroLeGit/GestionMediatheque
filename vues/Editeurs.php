@@ -138,8 +138,8 @@
       ?>
       <tr>
         <td style="text-align: center;"> <?php echo $value['EditeurNum'] ?> </td>
-        <td id="tdEditeurs<?php echo $idediteur; ?>" style="text-align: center;"> <?php echo $value['Editeurs'] ?> </td>
-        <td id="tdEditeurs<?php echo $idediteur; ?>" style="text-align: center;"> <?php echo $value['EditeursCreation'] ?> </td>
+        <td id="tdEditeurs<?php echo $idediteur; ?>" style="text-align: center;"> <?php echo $editeur ?> </td>
+        <td id="tdEditeurs<?php echo $idediteur; ?>" style="text-align: center;"> <?php echo $editeurcreation ?> </td>
         <td style="text-align: center;"><button type="button" class="btn btn-info" onclick="modifFormulaireEditeurs(<?php echo $idediteur.",'".$editeur."',".$editeurcreation; ?>)">Modifier</button></td>
         <td style="text-align: center;"><button type="button" class="btn btn-info" onclick="supprEditeurs(<?php echo $idediteur; ?>)">Supprimer</button></td>
         <td><br/><br/></td>

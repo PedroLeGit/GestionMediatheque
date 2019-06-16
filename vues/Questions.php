@@ -1,3 +1,29 @@
+<?php
+
+if (isset($_SESSION["formulaire_envoye"])) {
+	$_POST = $_SESSION["formulaire_envoye"];
+	unset($_SESSION["formulaire_envoye"]);
+}
+
+require ('inc/dbGM.php');
+// var_dump($_POST);
+if (!empty($_POST)){
+
+		$libelle = $_POST['libelle'];
+		$choix1 = $_POST['choix1'];
+    $choix2 = $_POST['choix2'];
+    $choix3 = $_POST['choix3'];
+    $solution = $_POST['solution'];
+    $categorie = $_POST['categorie'];
+
+    $sql2 = $pdoC->prepare('INSERT INTO questions (libelle_question, choix1_question, choix2_question, choix3_question, solution_question, categorie_question)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?)');
+    $exec = $sql2->execute([$libelle,$choix1,$choix2,$choix3,$solution,$categorie]);
+  }
+
+?>
+
+
 <script>
 function ajoutQuestion(){
 
@@ -43,27 +69,4 @@ function ajoutQuestion(){
 </form>
 </div>
 
-<?php
-
-if (isset($_SESSION["formulaire_envoye"])) {
-	$_POST = $_SESSION["formulaire_envoye"];
-	unset($_SESSION["formulaire_envoye"]);
-}
-
-require ('inc/dbGM.php');
-var_dump($_POST);
-if (!empty($_POST)){
-
-		$libelle = $_POST['libelle'];
-		$choix1 = $_POST['choix1'];
-    $choix2 = $_POST['choix2'];
-    $choix3 = $_POST['choix3'];
-    $solution = $_POST['solution'];
-    $categorie = $_POST['categorie'];
-
-    $sql2 = $pdoC->prepare('INSERT INTO questions (libelle_question, choix1_question, choix2_question, choix3_question, solution_question, categorie_question)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?)');
-    $exec = $sql2->execute([$libelle,$choix1,$choix2,$choix3,$solution,$categorie]);
-  }
-
-?>
+<?php header('Location: http://http://pedroperso.ovh/index.php', true, 303); ?>

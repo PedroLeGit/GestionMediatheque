@@ -14,9 +14,6 @@ if (!empty($_POST)){
 		$serie = $_POST['series'];
 		$editeur = $_POST['editeurs'];
 
-		var_dump($_POST['editeurs']);
-		var_dump($_POST['series']);
-
 		 // $res = $pdoC->prepare('SELECT SerieNum FROM serie WHERE SerieNom = ?');
 		 // $res->execute([$serie]);
 		 // $resC1 = $res->fetchAll(PDO::FETCH_ASSOC);
