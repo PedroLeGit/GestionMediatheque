@@ -1,3 +1,48 @@
+<script>
+function ajoutQuestion(){
+
+}
+</script>
+
+<br/>
+<br/>
+<br/>
+<div class="container">
+  <h2>Ajouter une nouvelle question</h2>
+<form name="FormulaireQuestion" action="/" onsubmit="return ajoutQuestion()" method="post">
+  <div class="form-group">
+    <label for="libelle">Libelle de la question</label>
+    <input type="text" name="libelle" class="form-control" id="libelle" aria-describedby="libelle" placeholder="Libelle">
+  </div>
+  <div class="form-group">
+    <label for="choix1">1er choix</label>
+    <input type="text" name="choix1" class="form-control" id="choix1" aria-describedby="choix1" placeholder="Choix 1">
+  </div>
+  <div class="form-group">
+    <label for="choix2">2eme choix</label>
+    <input type="text" name="choix2" class="form-control" id="choix2" aria-describedby="choix2" placeholder="Choix 2">
+  </div>
+  <div class="form-group">
+    <label for="choix3">3eme choix</label>
+    <input type="text" name="choix3" class="form-control" id="choix3" aria-describedby="choix3" placeholder="Choix 3">
+  </div>
+  <div class="form-group">
+    <label for="solution">Solution</label>
+    <input type="text" name="solution" class="form-control" id="solution" aria-describedby="solution" placeholder="Solution">
+  </div>
+
+  <div class="form-group">
+    <label for="categorie">Categorie</label>
+   <select class="form-control" id="categorie" name="categorie">
+     <option>BD</option>
+     <option>MANGA</option>
+     <option>COMICS</option>
+   </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Ajouter la question</button>
+</form>
+</div>
+
 <?php
 
 if (isset($_SESSION["formulaire_envoye"])) {
@@ -6,7 +51,9 @@ if (isset($_SESSION["formulaire_envoye"])) {
 }
 
 require ('inc/dbGM.php');
+var_dump($_POST);
 if (!empty($_POST)){
+
 		$libelle = $_POST['libelle'];
 		$choix1 = $_POST['choix1'];
     $choix2 = $_POST['choix2'];
@@ -18,43 +65,5 @@ if (!empty($_POST)){
     VALUES (?,?,?,?,?,?,?,?,?,?,?)');
     $exec = $sql2->execute([$libelle,$choix1,$choix2,$choix3,$solution,$categorie]);
   }
+
 ?>
-
-<br/>
-<br/>
-<br/>
-<div class="container">
-  <h2>Ajouter une nouvelle question</h2>
-<form>
-  <div class="form-group">
-    <label for="libelle">Libelle de la question</label>
-    <input type="text" class="form-control" id="libelle" aria-describedby="libelle" placeholder="Libelle">
-  </div>
-  <div class="form-group">
-    <label for="choix1">1er choix</label>
-    <input type="text" class="form-control" id="choix1" aria-describedby="choix1" placeholder="Choix 1">
-  </div>
-  <div class="form-group">
-    <label for="choix2">2eme choix</label>
-    <input type="text" class="form-control" id="choix2" aria-describedby="choix2" placeholder="Choix 2">
-  </div>
-  <div class="form-group">
-    <label for="choix3">3eme choix</label>
-    <input type="text" class="form-control" id="choix3" aria-describedby="choix3" placeholder="Choix 3">
-  </div>
-  <div class="form-group">
-    <label for="solution">Solution</label>
-    <input type="text" class="form-control" id="solution" aria-describedby="solution" placeholder="Solution">
-  </div>
-
-  <div class="form-group">
-    <label for="categorie">Categorie</label>
-   <select class="form-control" id="categorie">
-     <option>BD</option>
-     <option>MANGA</option>
-     <option>COMICS</option>
-   </select>
-  </div>
-  <button type="submit" class="btn btn-primary">Ajouter la question</button>
-</form>
-</div>
