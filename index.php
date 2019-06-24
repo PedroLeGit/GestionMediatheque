@@ -1,6 +1,19 @@
 <?php
 require ('inc/header.php');
+
+if(isset($_GET['result'])){
+$successAjoutQuestion =  $_GET['result'];
+}
+
+if(!empty($successAjoutQuestion) && $successAjoutQuestion == "success"){
+	alertAjout();
+}
 ?>
+<script>
+function alertAjout(){
+	alert('Utilisateur bien ajoute');
+}
+</script>
 
 
 

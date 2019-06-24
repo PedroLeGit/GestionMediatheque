@@ -15,13 +15,16 @@ if (isset($_SESSION["formulaire_envoye"])) {
 	    $sql2 = $pdoC->prepare('INSERT INTO serie (SerieNom, SerieNbTomes)
 	    VALUES (?,?)');
 	    $exec = $sql2->execute([$_POST['serienom'], $_POST['serienbtomes']]);
+			if($sql2->execute() == true){
+				echo 'true';
+			}else {
+				echo 'false';
+			}
 	  }
-	  ?>
-	<script>
-	location.reload();
-	</script><?php
+
 
 	}
+
 
 
 ?>

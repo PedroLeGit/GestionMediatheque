@@ -10,9 +10,13 @@ if (isset($_SESSION["formulaire_envoye"])) {
 
 
 if (!empty($_POST)){
+	if(!empty($_POST['titre']) && !empty($_POST['isbn'])&& !empty($_POST['tome']) && !empty($_POST['parution']) &&
+	!empty($_POST['nbpages']) && !empty($_POST['image']) && !empty($_POST['couleur']) &&
+	 !empty($_POST['commentaire']) && !empty($_POST['format'])){
 
 		$serie = $_POST['series'];
 		$editeur = $_POST['editeurs'];
+		var_dump($_POST);
 
 		 // $res = $pdoC->prepare('SELECT SerieNum FROM serie WHERE SerieNom = ?');
 		 // $res->execute([$serie]);
@@ -32,13 +36,13 @@ if (!empty($_POST)){
     $exec = $sql2->execute([$_POST['titre'], $_POST['isbn'], $_POST['tome'], $_POST['parution'], $_POST['nbpages'], $_POST['image'], $_POST['couleur'],
 		 $_POST['commentaire'], $_POST['format'], (int)$serie, (int)$editeur]);
 
-  ?>
 
-  <!-- <script>
-	location.reload();
-	</script>-->
-	<?php
-
+	if($sql2->execute() == true){
+		echo 'true';
+	}else {
+		echo 'false';
+	}
+}
 }
 ?>
 

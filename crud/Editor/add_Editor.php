@@ -15,7 +15,7 @@ if (isset($_SESSION["formulaire_envoye"])) {
      && !empty($_POST['editeurville']) && !empty($_POST['editeurtel'])
      && !empty($_POST['editeurfax'])  && !empty($_POST['editeurmail'])
      && !empty($_POST['editeurnomcontact']) && !empty($_POST['editeurprenomcontact'])){
-
+// var_dump($_POST);
 	    $sql2 = $pdoC->prepare('INSERT INTO editeur (EditeurNom, EditeurCreation, EditeurAdresse, EditeurCP, EditeurVille, EditeurTel, EditeurFax, EditeurMail, EditeurNomContact, EditeurPrenomContact)
 	    VALUES (?,?,?,?,?,?,?,?,?,?)');
 	    $exec = $sql2->execute([$_POST['editeurnom'],$_POST['editeurcreation'],
@@ -23,11 +23,14 @@ if (isset($_SESSION["formulaire_envoye"])) {
         $_POST['editeurville'],$_POST['editeurtel'],
         $_POST['editeurfax'],$_POST['editeurmail'],
         $_POST['editeurnomcontact'],$_POST['editeurprenomcontact']]);
+		if($sql2->execute() == true){
+			echo 'true';
+		}else {
+			echo 'false';
+		}
 	  }
-	  ?>
-	<script>
-	location.reload();
-	</script><?php
+
+
 
 	}
 

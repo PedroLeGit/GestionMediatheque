@@ -8,6 +8,8 @@ if (isset($_SESSION["formulaire_envoye"])) {
 require ('inc/dbGM.php');
 // var_dump($_POST);
 if (!empty($_POST)){
+	if(!empty($_POST['libelle']) && !empty($_POST['choix1']) && !empty($_POST['choix2'])
+	 && !empty($_POST['choix3']) && !empty($_POST['solution']) && !empty($_POST['categorie'])){
 
 		$libelle = $_POST['libelle'];
 		$choix1 = $_POST['choix1'];
@@ -16,10 +18,11 @@ if (!empty($_POST)){
     $solution = $_POST['solution'];
     $categorie = $_POST['categorie'];
 
-    $sql2 = $pdoC->prepare('INSERT INTO questions (libelle_question, choix1_question, choix2_question, choix3_question, solution_question, categorie_question)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?)');
+    $sql2 = $pdoGM->prepare('INSERT INTO questions (libelle_question, choix1_question, choix2_question, choix3_question, solution_question, categorie_question)
+    VALUES (?,?,?,?,?,?)');
     $exec = $sql2->execute([$libelle,$choix1,$choix2,$choix3,$solution,$categorie]);
   }
+}
 
 ?>
 
@@ -60,13 +63,13 @@ function ajoutQuestion(){
   <div class="form-group">
     <label for="categorie">Categorie</label>
    <select class="form-control" id="categorie" name="categorie">
-     <option>BD</option>
-     <option>MANGA</option>
-     <option>COMICS</option>
+     <option value="bd">BD</option>
+     <option value="manga">MANGA</option>
+     <option value="comics">COMICS</option>
    </select>
   </div>
   <button type="submit" class="btn btn-primary">Ajouter la question</button>
 </form>
 </div>
 
- <?php //header('Location: http://http://pedroperso.ovh/index.php', true, 303); ?>
+ <?php //header('Location: index.php?result=success'); ?>

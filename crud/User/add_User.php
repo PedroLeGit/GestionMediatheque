@@ -20,16 +20,12 @@ if (!empty($_POST)){
     $sql2 = $pdoC->prepare('INSERT INTO emprunteur (emp_nom, emp_prenom, emp_rue, emp_code_postal, emp_ville, emp_date_naiss, emp_mail, emp_prem_adh)
     VALUES (?,?,?,?,?,?,?,?)');
     $exec = $sql2->execute([$_POST['nom'], $_POST['prenom'], $_POST['rue'], $_POST['cp'], $_POST['ville'], $_POST['datenaissance'], $_POST['mail'], $_POST['dateinscription']]);
+		if($sql2->execute() == true){
+		echo'true';
+	 }else {
+		 echo'false';
+	 }
   }
-  ?>
-<script>
- if($exec == true){
-  alert("Utilisateur enregistre");
-}else {
-  alert("Erreur d'enregistrement");
-}
-location.reload();
-</script><?php
 
 }
 
